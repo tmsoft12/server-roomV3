@@ -1,0 +1,17 @@
+{
+  "door1": {
+    "data": "closed",
+    "message": "🚪 door1 Sensor Triggered: closed",
+    "topic": "door1"
+  },
+  "door2": {
+    "data": "closed",
+    "message": "🚪 door2 Sensor Triggered: closed",
+    "topic": "door2"
+  },
+  "main": {
+    "data": "open",
+    "message": "🚪 main Sensor Triggered: open",
+    "topic": "main"
+  }
+}

@@ -124,6 +124,6 @@ func GetSensorDataByDateHandler(c *fiber.Ctx) error {
 		"totalPages": totalPages,
 		"hasNext":    hasNext,
 		"hasPrev":    hasPrev,
-		"results":    sensors,
+		"data":       sensors,
 	})
 }

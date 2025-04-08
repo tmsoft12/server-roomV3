@@ -1,16 +1,20 @@
 package mqtt
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"os"
 	"server/controllers"
+	"sync"
 
 	mqtt "github.com/eclipse/paho.mqtt.golang"
 )
 
 var client mqtt.Client
 var topics map[string]string
+var dataFile = "sensor_data.json"
+var mu sync.Mutex
 
 func ConnectMQTT() {
 	topics = map[string]string{
@@ -71,7 +75,87 @@ var messageHandler mqtt.MessageHandler = func(client mqtt.Client, msg mqtt.Messa
 		log.Printf("⚠️ No Friendly Name Found for Topic: %s", msg.Topic())
 		return
 	}
+
+	// Prepare the sensor data in the specified format
+	sensorData := map[string]string{
+		"data":    string(msg.Payload()),
+		"message": fmt.Sprintf("🚪 %s Sensor Triggered: %s", friendlyName, string(msg.Payload())),
+		"topic":   friendlyName,
+	}
+
+	// Marshal the sensor data to JSON format
+	dataJson, err := json.Marshal(sensorData)
+	if err != nil {
+		log.Printf("❌ Error Marshalling Sensor Data: %v", err)
+		return
+	}
+
+	// Save or update the sensor data in the JSON file
+	saveOrUpdateData(friendlyName, dataJson)
 	controllers.HandleSensorData(friendlyName, string(msg.Payload()))
+}
+
+// Function to save or update the JSON file
+func saveOrUpdateData(topic string, data []byte) {
+	mu.Lock()
+	defer mu.Unlock()
+
+	// Check if the file exists and if not, create it with empty data
+	if _, err := os.Stat(dataFile); os.IsNotExist(err) {
+		// If the file doesn't exist, create an empty JSON object
+		initialData := "{}"
+		err := os.WriteFile(dataFile, []byte(initialData), 0644) // Changed to os.WriteFile
+		if err != nil {
+			log.Printf("❌ Error Creating Initial JSON File: %v", err)
+			return
+		}
+	}
+
+	// Read the existing data from the file
+	fileData, err := os.ReadFile(dataFile) // Changed to os.ReadFile
+	if err != nil {
+		log.Printf("❌ Error Reading File: %v", err)
+		return
+	}
+
+	var existingData map[string]json.RawMessage
+	if len(fileData) == 0 {
+		// File is empty, initialize with an empty map
+		existingData = make(map[string]json.RawMessage)
+	} else {
+		// Try unmarshalling the file data if it's not empty
+		err = json.Unmarshal(fileData, &existingData)
+		if err != nil {
+			log.Printf("❌ Error Unmarshalling File Data: %v", err)
+			// Fallback to an empty map if unmarshalling fails
+			existingData = make(map[string]json.RawMessage)
+		}
+	}
+
+	// Update or add the new sensor data
+	existingData[topic] = data
+
+	// Marshal the updated content back to JSON
+	updatedData, err := json.MarshalIndent(existingData, "", "  ")
+	if err != nil {
+		log.Printf("❌ Error Marshalling Updated Data: %v", err)
+		return
+	}
+
+	// Write the updated data back to the file
+	tempFile := dataFile + ".tmp"
+	err = os.WriteFile(tempFile, updatedData, 0644) // Changed to os.WriteFile
+	if err != nil {
+		log.Printf("❌ Error Writing Temp File: %v", err)
+		return
+	}
+
+	// Rename the temp file to the original file
+	err = os.Rename(tempFile, dataFile)
+	if err != nil {
+		log.Printf("❌ Error Renaming Temp File: %v", err)
+		return
+	}
 }
 
 func Publish(topic, message string) {
