@@ -1,7 +1,7 @@
 {
   "door1": {
-    "data": "closed",
-    "message": "🚪 door1 Sensor Triggered: closed",
+    "data": "3",
+    "message": "🚪 door1 Sensor Triggered: 3",
     "topic": "door1"
   },
   "door2": {
@@ -9,9 +9,44 @@
     "message": "🚪 door2 Sensor Triggered: closed",
     "topic": "door2"
   },
-  "main": {
+  "door3": {
+    "data": "closed",
+    "message": "🚪 door3 Sensor Triggered: closed",
+    "topic": "door3"
+  },
+  "door4": {
     "data": "open",
-    "message": "🚪 main Sensor Triggered: open",
+    "message": "🚪 door4 Sensor Triggered: open",
+    "topic": "door4"
+  },
+  "door5": {
+    "data": "open",
+    "message": "🚪 door5 Sensor Triggered: open",
+    "topic": "door5"
+  },
+  "door6": {
+    "data": "open",
+    "message": "🚪 door6 Sensor Triggered: open",
+    "topic": "door6"
+  },
+  "door7": {
+    "data": "open",
+    "message": "🚪 door7 Sensor Triggered: open",
+    "topic": "door7"
+  },
+  "humidity": {
+    "data": "33",
+    "message": "🚪 humidity Sensor Triggered: 33",
+    "topic": "humidity"
+  },
+  "main": {
+    "data": "closed",
+    "message": "🚪 main Sensor Triggered: closed",
     "topic": "main"
+  },
+  "temperature": {
+    "data": "33",
+    "message": "🚪 temperature Sensor Triggered: 33",
+    "topic": "temperature"
   }
 }

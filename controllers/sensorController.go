@@ -32,13 +32,10 @@ func HandleSensorData(topic string, data string) {
 	switch topic {
 	case "temperature":
 		message = fmt.Sprintf("🌡️ Temperature Data Received: %s", data)
-		fmt.Println(message)
 	case "humidity":
 		message = fmt.Sprintf("💧 Humidity Data Received: %s", data)
-		fmt.Println(message)
 	case "main":
 		message = fmt.Sprintf("🚪 Main Door Sensor Triggered: %s", data)
-		fmt.Println(message)
 		if data == "open" {
 			msg := "Server Esasy gapysy açyldy. Giriş kontrolyny we howpsuzlyk çärelerini gözden geçiriň."
 			err := SendSMS(phoneNumber, msg)
@@ -48,7 +45,6 @@ func HandleSensorData(topic string, data string) {
 		}
 	case "door1":
 		message = fmt.Sprintf("🚪 Door 1 Sensor Triggered: %s", data)
-		fmt.Println(message)
 		if data == "open" {
 			msg := "Server 1-nji gapysy açyldy. Giriş kontrolyny we howpsuzlyk çärelerini gözden geçiriň."
 			err := SendSMS(phoneNumber, msg)
@@ -58,7 +54,6 @@ func HandleSensorData(topic string, data string) {
 		}
 	case "door2":
 		message = fmt.Sprintf("🚪 Door 2 Sensor Triggered: %s", data)
-		fmt.Println(message)
 		if data == "open" {
 			msg := "Server 2-nji gapysy açyldy. Giriş kontrolyny we howpsuzlyk çärelerini gözden geçiriň."
 			err := SendSMS(phoneNumber, msg)
@@ -68,7 +63,6 @@ func HandleSensorData(topic string, data string) {
 		}
 	case "door3":
 		message = fmt.Sprintf("🚪 Door 3 Sensor Triggered: %s", data)
-		fmt.Println(message)
 		if data == "open" {
 			msg := "Server 3-nji gapysy açyldy. Giriş kontrolyny we howpsuzlyk çärelerini gözden geçiriň."
 			err := SendSMS(phoneNumber, msg)
@@ -78,7 +72,6 @@ func HandleSensorData(topic string, data string) {
 		}
 	case "door4":
 		message = fmt.Sprintf("🚪 Door 4 Sensor Triggered: %s", data)
-		fmt.Println(message)
 		if data == "open" {
 			msg := "Server 4-nji gapysy açyldy. Giriş kontrolyny we howpsuzlyk çärelerini gözden geçiriň."
 			err := SendSMS(phoneNumber, msg)
@@ -89,7 +82,6 @@ func HandleSensorData(topic string, data string) {
 
 	case "door5":
 		message = fmt.Sprintf("🚪 Door 5 Sensor Triggered: %s", data)
-		fmt.Println(message)
 		if data == "open" {
 			msg := "Server 5-nji gapysy açyldy. Giriş kontrolyny we howpsuzlyk çärelerini gözden geçiriň."
 			err := SendSMS(phoneNumber, msg)
@@ -99,7 +91,6 @@ func HandleSensorData(topic string, data string) {
 		}
 	case "door6":
 		message = fmt.Sprintf("🚪 Door 6 Sensor Triggered: %s", data)
-		fmt.Println(message)
 		if data == "open" {
 			msg := "Server 6-nji gapysy açyldy. Giriş kontrolyny we howpsuzlyk çärelerini gözden geçiriň."
 			err := SendSMS(phoneNumber, msg)
@@ -109,7 +100,6 @@ func HandleSensorData(topic string, data string) {
 		}
 	case "door7":
 		message = fmt.Sprintf("🚪 Door 7 Sensor Triggered: %s", data)
-		fmt.Println(message)
 		if data == "open" {
 			msg := "Server 7-nji gapysy açyldy. Giriş kontrolyny we howpsuzlyk çärelerini gözden geçiriň."
 			err := SendSMS(phoneNumber, msg)

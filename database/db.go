@@ -40,12 +40,61 @@ func InitDatabase() {
 
 func InsertSensorData(topic, data string) error {
 	if data == "open" {
-		data = " Acyldy"
-		fmt.Println("Data is open")
+		data = " Açyldy"
 	} else if data == "closed" {
-		data = " Yapyldy"
-		fmt.Println("Data is close")
+		data = " Ýapyldy"
 	}
+	if "21" <= data && topic == "temperature" {
+		topic = "Gyzgynlyk"
+		data = fmt.Sprintf("%s C", data)
+		add(topic, data)
+	}
+	if "31" <= data && topic == "humidity" {
+		topic = "Çyglylyk"
+		data = fmt.Sprintf("%s %s", data, string("%"))
+		add(topic, data)
+	}
+
+	if topic == "main" {
+		topic = "Easasy Gapy"
+		add(topic, data)
+	}
+
+	switch topic {
+	case "door1":
+		topic = "Gapy 1"
+		add(topic, data)
+
+	case "door2":
+		topic = "Gapy 2"
+		add(topic, data)
+
+	case "door3":
+		topic = "Gapy 3"
+		add(topic, data)
+
+	case "door4":
+		topic = "Gapy 4"
+		add(topic, data)
+
+	case "door5":
+		topic = "Gapy 5"
+		add(topic, data)
+
+	case "door6":
+		topic = "Gapy 6"
+		add(topic, data)
+
+	case "door7":
+		topic = "Gapy 7"
+		add(topic, data)
+
+	}
+
+	return nil
+}
+func add(topic string, data string) error {
+
 	insertSQL := `INSERT INTO sensor_data (topic, data) VALUES (?, ?)`
 	_, err := DB.Exec(insertSQL, topic, data)
 	if err != nil {
