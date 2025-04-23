@@ -22,7 +22,6 @@ func SendSMS(phoneNumber, message string) error {
 	fmt.Println("SMS Dont send:", string(output))
 	return nil
 }
-
 func HandleSensorData(topic string, data string) {
 	var message string
 	var jsonData []byte
@@ -30,100 +29,83 @@ func HandleSensorData(topic string, data string) {
 	if phoneNumber == "" {
 		phoneNumber = "+99362805208"
 	}
-
 	switch topic {
 	case "temperature":
 		message = fmt.Sprintf("🌡️ Temperature Data Received: %s", data)
-
 	case "humidity":
 		message = fmt.Sprintf("💧 Humidity Data Received: %s", data)
-
 	case "main":
 		message = fmt.Sprintf("🚪 Main Door Sensor Triggered: %s", data)
 		if data == "open" {
-			go func() {
-				msg := "Server Esasy gapysy açyldy. Giriş kontrolyny we howpsuzlyk çärelerini gözden geçiriň."
-				if err := SendSMS(phoneNumber, msg); err != nil {
-					log.Println("SMS err:", err)
-				}
-			}()
+			msg := "Server Esasy gapysy açyldy. Giriş kontrolyny we howpsuzlyk çärelerini gözden geçiriň."
+			err := SendSMS(phoneNumber, msg)
+			if err != nil {
+				log.Println("SMS err:", err)
+			}
 		}
-
 	case "door1":
 		message = fmt.Sprintf("🚪 Door 1 Sensor Triggered: %s", data)
 		if data == "open" {
-			go func() {
-				msg := "Server 1-nji gapysy açyldy. Giriş kontrolyny we howpsuzlyk çärelerini gözden geçiriň."
-				if err := SendSMS(phoneNumber, msg); err != nil {
-					log.Println("SMS err:", err)
-				}
-			}()
+			msg := "Server 1-nji gapysy açyldy. Giriş kontrolyny we howpsuzlyk çärelerini gözden geçiriň."
+			err := SendSMS(phoneNumber, msg)
+			if err != nil {
+				log.Println("SMS err:", err)
+			}
 		}
-
 	case "door2":
 		message = fmt.Sprintf("🚪 Door 2 Sensor Triggered: %s", data)
 		if data == "open" {
-			go func() {
-				msg := "Server 2-nji gapysy açyldy. Giriş kontrolyny we howpsuzlyk çärelerini gözden geçiriň."
-				if err := SendSMS(phoneNumber, msg); err != nil {
-					log.Println("SMS err:", err)
-				}
-			}()
+			msg := "Server 2-nji gapysy açyldy. Giriş kontrolyny we howpsuzlyk çärelerini gözden geçiriň."
+			err := SendSMS(phoneNumber, msg)
+			if err != nil {
+				log.Println("SMS err:", err)
+			}
 		}
-
 	case "door3":
 		message = fmt.Sprintf("🚪 Door 3 Sensor Triggered: %s", data)
 		if data == "open" {
-			go func() {
-				msg := "Server 3-nji gapysy açyldy. Giriş kontrolyny we howpsuzlyk çärelerini gözden geçiriň."
-				if err := SendSMS(phoneNumber, msg); err != nil {
-					log.Println("SMS err:", err)
-				}
-			}()
+			msg := "Server 3-nji gapysy açyldy. Giriş kontrolyny we howpsuzlyk çärelerini gözden geçiriň."
+			err := SendSMS(phoneNumber, msg)
+			if err != nil {
+				log.Println("SMS err:", err)
+			}
 		}
-
 	case "door4":
 		message = fmt.Sprintf("🚪 Door 4 Sensor Triggered: %s", data)
 		if data == "open" {
-			go func() {
-				msg := "Server 4-nji gapysy açyldy. Giriş kontrolyny we howpsuzlyk çärelerini gözden geçiriň."
-				if err := SendSMS(phoneNumber, msg); err != nil {
-					log.Println("SMS err:", err)
-				}
-			}()
+			msg := "Server 4-nji gapysy açyldy. Giriş kontrolyny we howpsuzlyk çärelerini gözden geçiriň."
+			err := SendSMS(phoneNumber, msg)
+			if err != nil {
+				log.Println("SMS err:", err)
+			}
 		}
 
 	case "door5":
 		message = fmt.Sprintf("🚪 Door 5 Sensor Triggered: %s", data)
 		if data == "open" {
-			go func() {
-				msg := "Server 5-nji gapysy açyldy. Giriş kontrolyny we howpsuzlyk çärelerini gözden geçiriň."
-				if err := SendSMS(phoneNumber, msg); err != nil {
-					log.Println("SMS err:", err)
-				}
-			}()
+			msg := "Server 5-nji gapysy açyldy. Giriş kontrolyny we howpsuzlyk çärelerini gözden geçiriň."
+			err := SendSMS(phoneNumber, msg)
+			if err != nil {
+				log.Println("SMS err:", err)
+			}
 		}
-
 	case "door6":
 		message = fmt.Sprintf("🚪 Door 6 Sensor Triggered: %s", data)
 		if data == "open" {
-			go func() {
-				msg := "Server 6-njy gapysy açyldy. Giriş kontrolyny we howpsuzlyk çärelerini gözden geçiriň."
-				if err := SendSMS(phoneNumber, msg); err != nil {
-					log.Println("SMS err:", err)
-				}
-			}()
+			msg := "Server 6-nji gapysy açyldy. Giriş kontrolyny we howpsuzlyk çärelerini gözden geçiriň."
+			err := SendSMS(phoneNumber, msg)
+			if err != nil {
+				log.Println("SMS err:", err)
+			}
 		}
-
 	case "door7":
 		message = fmt.Sprintf("🚪 Door 7 Sensor Triggered: %s", data)
 		if data == "open" {
-			go func() {
-				msg := "Server 7-nji gapysy açyldy. Giriş kontrolyny we howpsuzlyk çärelerini gözden geçiriň."
-				if err := SendSMS(phoneNumber, msg); err != nil {
-					log.Println("SMS err:", err)
-				}
-			}()
+			msg := "Server 7-nji gapysy açyldy. Giriş kontrolyny we howpsuzlyk çärelerini gözden geçiriň."
+			err := SendSMS(phoneNumber, msg)
+			if err != nil {
+				log.Println("SMS err:", err)
+			}
 		}
 
 	default:
@@ -136,7 +118,6 @@ func HandleSensorData(topic string, data string) {
 		"data":    data,
 		"message": message,
 	}
-
 	jsonData, err := json.Marshal(payload)
 	if err != nil {
 		log.Println("JSON Marshalling Error:", err)
