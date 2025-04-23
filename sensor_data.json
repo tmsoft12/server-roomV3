@@ -1,7 +1,7 @@
 {
   "door1": {
-    "data": "3",
-    "message": "🚪 door1 Sensor Triggered: 3",
+    "data": "closed",
+    "message": "🚪 door1 Sensor Triggered: closed",
     "topic": "door1"
   },
   "door2": {
@@ -35,8 +35,8 @@
     "topic": "door7"
   },
   "humidity": {
-    "data": "33",
-    "message": "🚪 humidity Sensor Triggered: 33",
+    "data": "30",
+    "message": "🚪 humidity Sensor Triggered: 30",
     "topic": "humidity"
   },
   "main": {
@@ -45,8 +45,8 @@
     "topic": "main"
   },
   "temperature": {
-    "data": "33",
-    "message": "🚪 temperature Sensor Triggered: 33",
+    "data": "22",
+    "message": "🚪 temperature Sensor Triggered: 22",
     "topic": "temperature"
   }
 }

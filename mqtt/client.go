@@ -75,9 +75,22 @@ var messageHandler mqtt.MessageHandler = func(client mqtt.Client, msg mqtt.Messa
 		return
 	}
 
+	payloadStr := string(msg.Payload())
+
+	if friendlyName == "temperature" {
+		var temp int
+		_, err := fmt.Sscanf(payloadStr, "%d", &temp)
+		if err == nil {
+			temp -= 10
+			payloadStr = fmt.Sprintf("%d", temp)
+		} else {
+			log.Printf("❌ Temperature parsing error: %v", err)
+		}
+	}
+
 	sensorData := map[string]string{
-		"data":    string(msg.Payload()),
-		"message": fmt.Sprintf("🚪 %s Sensor Triggered: %s", friendlyName, string(msg.Payload())),
+		"data":    payloadStr,
+		"message": fmt.Sprintf("🚪 %s Sensor Triggered: %s", friendlyName, payloadStr),
 		"topic":   friendlyName,
 	}
 
@@ -88,7 +101,7 @@ var messageHandler mqtt.MessageHandler = func(client mqtt.Client, msg mqtt.Messa
 	}
 
 	saveOrUpdateData(friendlyName, dataJson)
-	controllers.HandleSensorData(friendlyName, string(msg.Payload()))
+	controllers.HandleSensorData(friendlyName, payloadStr)
 }
 
 func saveOrUpdateData(topic string, data []byte) {
